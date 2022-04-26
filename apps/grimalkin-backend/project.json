@@ -1,0 +1,52 @@
+{
+  "root": "apps/grimalkin-backend",
+  "sourceRoot": "apps/grimalkin-backend/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/grimalkin-backend",
+        "main": "apps/grimalkin-backend/src/main.ts",
+        "tsConfig": "apps/grimalkin-backend/tsconfig.app.json",
+        "assets": ["apps/grimalkin-backend/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/grimalkin-backend/src/environments/environment.ts",
+              "with": "apps/grimalkin-backend/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "grimalkin-backend:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/grimalkin-backend/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/grimalkin-backend"],
+      "options": {
+        "jestConfig": "apps/grimalkin-backend/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
