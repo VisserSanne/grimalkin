@@ -1,0 +1,28 @@
+{
+  "root": "apps/grimalkin-frontend-e2e",
+  "sourceRoot": "apps/grimalkin-frontend-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/grimalkin-frontend-e2e/cypress.json",
+        "devServerTarget": "grimalkin-frontend:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "grimalkin-frontend:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/grimalkin-frontend-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["grimalkin-frontend"]
+}
