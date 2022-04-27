@@ -1,8 +1,24 @@
 import { Fragment } from 'react';
 import { Global, css } from '@emotion/react';
 import emotionReset from 'emotion-reset';
+import { Breadcrumbs, Anchor } from '@mantine/core';
 
 import { Header } from './components';
+
+const ITEMS = [
+  {
+    title: 'Add Venue',
+    href: '#',
+  },
+  {
+    title: 'Renders the form',
+    href: '#',
+  },
+].map((item, index) => (
+  <Anchor href={item.href} key={index}>
+    {item.title}
+  </Anchor>
+));
 
 export function App() {
   return (
@@ -21,6 +37,7 @@ export function App() {
               sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background: #eee;
           }
 
           .t0 {
@@ -38,10 +55,54 @@ export function App() {
           * {
             box-sizing: border-box;
           }
+
+          .main {
+            padding: 24px;
+
+            ul {
+              display: flex;
+              flex-direction: column;
+              gap: 16px;
+
+              li {
+                background: #fff;
+                padding: 24px;
+                box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+              }
+            }
+          }
         `}
       />
       <Header />
-      <div>Hello World.</div>
+      <div className="main">
+        <ul>
+          <li>
+            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
+          </li>
+          <li>
+            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
+          </li>
+          <li>
+            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
+          </li>
+          <li>
+            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
+          </li>
+          <li>
+            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
+          </li>
+          <li>
+            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
+          </li>
+          <li>
+            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
+          </li>
+          <li>
+            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
+          </li>
+        </ul>
+      </div>
     </Fragment>
   );
 }
