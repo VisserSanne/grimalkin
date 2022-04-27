@@ -1,24 +1,10 @@
 import { Fragment } from 'react';
 import { Global, css } from '@emotion/react';
 import emotionReset from 'emotion-reset';
-import { Breadcrumbs, Anchor } from '@mantine/core';
+import { Route, Routes } from 'react-router-dom';
 
-import { Header } from './components';
-
-const ITEMS = [
-  {
-    title: 'Add Venue',
-    href: '#',
-  },
-  {
-    title: 'Renders the form',
-    href: '#',
-  },
-].map((item, index) => (
-  <Anchor href={item.href} key={index}>
-    {item.title}
-  </Anchor>
-));
+import { Layout } from './components';
+import { Dashboard, Runs } from './routes';
 
 export function App() {
   return (
@@ -39,6 +25,11 @@ export function App() {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             background: #eee;
+          }
+
+          h2 {
+            font-size: 2rem;
+            margin-bottom: 24px;
           }
 
           .t0 {
@@ -75,35 +66,12 @@ export function App() {
           }
         `}
       />
-      <Header />
-      <div className="main">
-        <ul>
-          <li>
-            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
-          </li>
-          <li>
-            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
-          </li>
-          <li>
-            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
-          </li>
-          <li>
-            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
-          </li>
-          <li>
-            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
-          </li>
-          <li>
-            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
-          </li>
-          <li>
-            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
-          </li>
-          <li>
-            <Breadcrumbs separator="→">{ITEMS}</Breadcrumbs>
-          </li>
-        </ul>
-      </div>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/runs/*" element={<Runs />} />
+        </Routes>
+      </Layout>
     </Fragment>
   );
 }
