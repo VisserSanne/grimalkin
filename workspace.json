@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "grimalkin-backend": "apps/grimalkin-backend"
+    "grimalkin-backend": "apps/grimalkin-backend",
+    "grimalkin-frontend": "apps/grimalkin-frontend",
+    "grimalkin-frontend-e2e": "apps/grimalkin-frontend-e2e"
   }
 }
