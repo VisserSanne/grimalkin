@@ -1,54 +1,48 @@
-import styled from '@emotion/styled';
-import NxWelcome from './nx-welcome';
+import { Fragment } from 'react';
+import { Global, css } from '@emotion/react';
+import emotionReset from 'emotion-reset';
 
-import { Route, Routes, Link } from 'react-router-dom';
-
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { Header } from './components';
 
 export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="grimalkin-frontend" />
+    <Fragment>
+      <Global
+        styles={css`
+          @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&display=swap');
 
-      {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
-      <br />
-      <hr />
-      <br />
-      <div role="navigation">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/page-2">Page 2</Link>
-          </li>
-        </ul>
-      </div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              This is the generated root route.{' '}
-              <Link to="/page-2">Click here for page 2.</Link>
-            </div>
+          ${emotionReset}
+          html,
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+              Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+              sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
           }
-        />
-        <Route
-          path="/page-2"
-          element={
-            <div>
-              <Link to="/">Click here to go back to root page.</Link>
-            </div>
+
+          .t0 {
+            font-family: 'Averia Serif Libre', serif;
           }
-        />
-      </Routes>
-      {/* END: routes */}
-    </StyledApp>
+
+          .chonk {
+            font-weight: 700;
+          }
+
+          .megachonk {
+            font-weight: 900;
+          }
+
+          * {
+            box-sizing: border-box;
+          }
+        `}
+      />
+      <Header />
+      <div>Hello World.</div>
+    </Fragment>
   );
 }
 
