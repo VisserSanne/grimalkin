@@ -1,54 +1,31 @@
-import styled from '@emotion/styled';
-import NxWelcome from './nx-welcome';
-
-import { Route, Routes, Link } from 'react-router-dom';
-
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { Fragment } from 'react';
+import { Global, css } from '@emotion/react';
+import emotionReset from 'emotion-reset';
 
 export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="grimalkin-frontend" />
+    <Fragment>
+      <Global
+        styles={css`
+          ${emotionReset}
+          html,
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+              Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+              sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
 
-      {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
-      <br />
-      <hr />
-      <br />
-      <div role="navigation">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/page-2">Page 2</Link>
-          </li>
-        </ul>
-      </div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              This is the generated root route.{' '}
-              <Link to="/page-2">Click here for page 2.</Link>
-            </div>
+          * {
+            box-sizing: border-box;
           }
-        />
-        <Route
-          path="/page-2"
-          element={
-            <div>
-              <Link to="/">Click here to go back to root page.</Link>
-            </div>
-          }
-        />
-      </Routes>
-      {/* END: routes */}
-    </StyledApp>
+        `}
+      />
+      <div>Hello World.</div>
+    </Fragment>
   );
 }
 
