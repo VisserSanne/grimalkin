@@ -23,6 +23,8 @@ export const Header = () => {
 
       a {
         color: inherit;
+        text-decoration: none;
+        font-weight: 600;
       }
     }
   `;

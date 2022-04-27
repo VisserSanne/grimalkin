@@ -28,6 +28,7 @@ export function App() {
           @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&display=swap');
 
           ${emotionReset}
+
           html,
           body {
             margin: 0;
