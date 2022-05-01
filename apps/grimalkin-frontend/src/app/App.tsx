@@ -1,8 +1,10 @@
 import { Fragment } from 'react';
 import { Global, css } from '@emotion/react';
 import emotionReset from 'emotion-reset';
+import { Route, Routes } from 'react-router-dom';
 
-import { Header } from './components';
+import { Layout } from './components';
+import { Dashboard, Runs } from './routes';
 
 export function App() {
   return (
@@ -12,6 +14,7 @@ export function App() {
           @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&display=swap');
 
           ${emotionReset}
+
           html,
           body {
             margin: 0;
@@ -21,6 +24,12 @@ export function App() {
               sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background: #eee;
+          }
+
+          h2 {
+            font-size: 2rem;
+            margin-bottom: 24px;
           }
 
           .t0 {
@@ -38,10 +47,31 @@ export function App() {
           * {
             box-sizing: border-box;
           }
+
+          .main {
+            padding: 24px;
+
+            ul {
+              display: flex;
+              flex-direction: column;
+              gap: 16px;
+
+              li {
+                background: #fff;
+                padding: 24px;
+                box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+              }
+            }
+          }
         `}
       />
-      <Header />
-      <div>Hello World.</div>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/runs/*" element={<Runs />} />
+        </Routes>
+      </Layout>
     </Fragment>
   );
 }
