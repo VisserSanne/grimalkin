@@ -37,6 +37,14 @@ export class TestResultsService {
     return this.testResultsRepository.findOne(id);
   }
 
+  findTestResultsByTestID(id: string): Promise<TestResult[]> {
+    return this.testResultsRepository.find({
+      where: {
+        test: id
+      }
+    })
+  }
+
   async remove(id: string): Promise<void> {
     await this.testResultsRepository.delete(id);
   }

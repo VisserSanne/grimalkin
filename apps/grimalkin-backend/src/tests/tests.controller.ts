@@ -1,11 +1,16 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { TestResult } from "../testresults/testresult.entity";
+import { TestResultsService } from "../testresults/testresults.service";
 import { CreateTestDto } from "./dto/create-test.dto";
 import { Test } from "./test.entity";
 import { TestsService } from "./tests.service";
 
 @Controller("tests")
 export class TestsController {
-  constructor(private readonly testsService: TestsService) {}
+  constructor(
+    private readonly testsService: TestsService, 
+    private readonly testResultsService: TestResultsService
+    ) {}
 
   @Post()
   create(@Body() createTestDto: CreateTestDto): Promise<Test> {
@@ -23,8 +28,8 @@ export class TestsController {
   }
 
   @Get(':id/testresults')
-  findTestResultsByTestID(@Param('id') id: string): Promise<Test> {
-    return this.testsService.findTestResultsByTestID(id);
+  findTestResultsByTestID(@Param('id') id: string): Promise<TestResult[]> {
+    return this.testResultsService.findTestResultsByTestID(id);
   }
 
   @Delete(':id')

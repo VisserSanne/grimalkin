@@ -34,16 +34,6 @@ export class TestsService {
     return this.testsRepository.findOne(id);
   }
 
-  findTestResultsByTestID(id: string): Promise<Test> {
-    console.log(id);
-    return this.testsRepository.findOne({
-      where: { id },
-      relations: [
-        "testresults"
-      ]
-    })
-  }
-
   async remove(id: string): Promise<void> {
     await this.testsRepository.delete(id);
   }
