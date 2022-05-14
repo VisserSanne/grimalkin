@@ -1,4 +1,5 @@
 export class CreateTestResultDto {
+  testrun: number;
   localRun: boolean;
   testId: string;
   runTime: number;

@@ -34,6 +34,23 @@ export class TestsService {
     return this.testsRepository.findOne(id);
   }
 
+  async findTestsByProjectId(projectId: string): Promise<Test[]> {
+    return this.testsRepository.find({
+      where: {
+        project: projectId
+      }
+    })
+  }
+
+  async findTestAndResultByRun(projectId: string, runnum: number): Promise<Test[]> {
+    return this.testsRepository
+      .createQueryBuilder('test')
+      .innerJoinAndSelect('test.testresults', 'testresults')
+      .where('test.projectId = :projectId', {projectId})
+      .andWhere('testresults.testrun = :runnum', {runnum})
+      .getMany();
+  }
+
   async remove(id: string): Promise<void> {
     await this.testsRepository.delete(id);
   }

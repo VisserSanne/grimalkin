@@ -32,6 +32,11 @@ export class TestsController {
     return this.testResultsService.findTestResultsByTestID(id);
   }
 
+  @Get('/project/:id')
+  findTestsByProjectId(@Param('id') projectId: string): Promise<Test[]> {
+    return this.testsService.findTestsByProjectId(projectId);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
     return this.testsService.remove(id);

@@ -7,6 +7,9 @@ export class TestResult {
   id: string;
 
   @Column()
+  testrun: number;
+
+  @Column()
   localrun: boolean;
 
   @ManyToOne(() => Test, (test) => test.testresults)

@@ -20,6 +20,7 @@ export class TestResultsService {
 
     const testResult = new TestResult();
     testResult.test = test;
+    testResult.testrun = createTestResultDto.testrun;
     testResult.localrun = createTestResultDto.localRun;
     testResult.runtime = createTestResultDto.runTime;
     testResult.executiondate = createTestResultDto.executiondate;
