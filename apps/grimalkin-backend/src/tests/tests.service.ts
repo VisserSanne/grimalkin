@@ -2,13 +2,13 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Project } from "../projects/project.entity";
-import { CreateTestDto } from "./dto/create-test.dto";
-import { Test } from "./test.entity";
+import { CreateTestDto, Test } from "@grimalkin/contracts";
+import { Test as TestEntity } from "./test.entity";
 
 @Injectable()
 export class TestsService {
   constructor(
-    @InjectRepository(Test)
+    @InjectRepository(TestEntity)
     private testsRepository: Repository<Test>,
     @InjectRepository(Project)
     private projectRepository: Repository<Project>
@@ -18,7 +18,7 @@ export class TestsService {
     // Get project
     const project = await this.projectRepository.findOne(createTestDto.projectId);
 
-    const test = new Test();
+    const test = new TestEntity();
     test.name = createTestDto.name;
     test.testsuite = createTestDto.testSuite;
     test.project = project;

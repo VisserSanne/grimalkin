@@ -2,13 +2,13 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Test } from "../tests/test.entity";
-import { CreateTestResultDto } from "./dto/create-testresult.dto";
-import { TestResult } from "./testresult.entity";
+import { CreateTestResultDto, TestResult } from "@grimalkin/contracts";
+import { TestResult as TestResultEntity } from "./testresult.entity";
 
 @Injectable()
 export class TestResultsService {
   constructor(
-    @InjectRepository(TestResult)
+    @InjectRepository(TestResultEntity)
     private testResultsRepository: Repository<TestResult>,
     @InjectRepository(Test)
     private testsRepository: Repository<Test>
@@ -18,7 +18,7 @@ export class TestResultsService {
     // Get Test
     const test = await this.testsRepository.findOne(createTestResultDto.testId);
 
-    const testResult = new TestResult();
+    const testResult = new TestResultEntity();
     testResult.test = test;
     testResult.testrun = createTestResultDto.testrun;
     testResult.localrun = createTestResultDto.localRun;

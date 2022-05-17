@@ -1,9 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
-import { TestResult } from "../testresults/testresult.entity";
-import { Test } from "../tests/test.entity";
+import { Test, CreateProjectDto, Project } from "@grimalkin/contracts";
 import { TestsService } from "../tests/tests.service";
-import { CreateProjectDto } from "./dto/create-project.dto";
-import { Project } from "./project.entity";
 import { ProjectsService } from "./projects.service";
 
 @Controller("projects")

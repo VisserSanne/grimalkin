@@ -1,24 +1,24 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Company } from "../companies/company.entity";
-import { CreateProjectDto } from "./dto/create-project.dto";
-import { Project } from "./project.entity";
+import { Company as CompanyEntity } from "../companies/company.entity";
+import { CreateProjectDto, Project } from "@grimalkin/contracts";
+import { Project as ProjectEntity } from "./project.entity";
 
 @Injectable()
 export class ProjectsService {
   constructor(
-    @InjectRepository(Project)
-    private projectsRepository: Repository<Project>,
-    @InjectRepository(Company)
-    private companiesRepository: Repository<Company>
+    @InjectRepository(ProjectEntity)
+    private projectsRepository: Repository<ProjectEntity>,
+    @InjectRepository(CompanyEntity)
+    private companiesRepository: Repository<CompanyEntity>
   ) {}
 
   async create(createProjectDto: CreateProjectDto): Promise<Project> {
     // Get company
     const company = await this.companiesRepository.findOne(createProjectDto.companyId);
 
-    const project = new Project();
+    const project = new ProjectEntity();
     project.name = createProjectDto.name;
     project.company = company;
 

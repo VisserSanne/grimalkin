@@ -2,13 +2,13 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Company } from "../companies/company.entity";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { User } from "./user.entity";
+import { CreateUserDto, User } from "@grimalkin/contracts";
+import { User as UserEntity } from "./user.entity";
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
+    @InjectRepository(UserEntity)
     private usersRepository: Repository<User>,
     @InjectRepository(Company)
     private companiesRepository: Repository<Company>
@@ -18,7 +18,7 @@ export class UsersService {
     // Get company
     const company = await this.companiesRepository.findOne(createUserDto.companyId);
 
-    const user = new User();
+    const user = new UserEntity();
     user.name = createUserDto.name;
     user.company = company;
 
