@@ -9,6 +9,6 @@ export class User {
   @Column()
   name: string;
 
-  @ManyToOne(() => Company, (company) => company.employees)
+  @ManyToOne(() => Company, (company) => company.employees, { onDelete: 'CASCADE' })
   company: Company;
 }

@@ -10,7 +10,7 @@ export class Test {
   @Column()
   name: string;
 
-  @ManyToOne(() => Project, (project) => project.tests)
+  @ManyToOne(() => Project, (project) => project.tests, { onDelete: 'CASCADE' })
   project: Project;
 
   @Column()

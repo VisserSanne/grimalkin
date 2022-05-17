@@ -12,7 +12,7 @@ export class TestResult {
   @Column()
   localrun: boolean;
 
-  @ManyToOne(() => Test, (test) => test.testresults)
+  @ManyToOne(() => Test, (test) => test.testresults, { onDelete: 'CASCADE' })
   test: Test;
 
   @Column()
