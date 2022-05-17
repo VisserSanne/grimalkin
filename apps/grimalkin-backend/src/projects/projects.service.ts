@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Company as CompanyEntity } from "../companies/company.entity";
-import { CreateProjectDto, Project } from "@grimalkin/contracts";
+import { CreateProjectDto, ProjectModel } from "@grimalkin/contracts";
 import { Project as ProjectEntity } from "./project.entity";
 
 @Injectable()
@@ -14,7 +14,7 @@ export class ProjectsService {
     private companiesRepository: Repository<CompanyEntity>
   ) {}
 
-  async create(createProjectDto: CreateProjectDto): Promise<Project> {
+  async create(createProjectDto: CreateProjectDto): Promise<ProjectModel> {
     // Get company
     const company = await this.companiesRepository.findOne(createProjectDto.companyId);
 
@@ -25,11 +25,11 @@ export class ProjectsService {
     return this.projectsRepository.save(project);
   }
 
-  findAll(): Promise<Project[]> {
+  findAll(): Promise<ProjectModel[]> {
     return this.projectsRepository.find();
   }
 
-  findOne(id: string): Promise<Project> {
+  findOne(id: string): Promise<ProjectModel> {
     return this.projectsRepository.findOne(id);
   }
 

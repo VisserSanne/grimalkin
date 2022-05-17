@@ -1,4 +1,4 @@
-export type Company = {
+export type CompanyModel = {
   id: string;
   name: string;
 }

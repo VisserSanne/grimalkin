@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
-import { Test, CreateProjectDto, Project } from "@grimalkin/contracts";
+import { TestModel, CreateProjectDto, ProjectModel } from "@grimalkin/contracts";
 import { TestsService } from "../tests/tests.service";
 import { ProjectsService } from "./projects.service";
 
@@ -11,22 +11,22 @@ export class ProjectsController {
     ) {}
 
   @Post()
-  create(@Body() createProjectDto: CreateProjectDto): Promise<Project> {
+  create(@Body() createProjectDto: CreateProjectDto): Promise<ProjectModel> {
     return this.projectsService.create(createProjectDto);
   }
 
   @Get()
-  findAll(): Promise<Project[]> {
+  findAll(): Promise<ProjectModel[]> {
     return this.projectsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Project> {
+  findOne(@Param('id') id: string): Promise<ProjectModel> {
     return this.projectsService.findOne(id);
   }
 
   @Get(':id/run/:runnum')
-  findTestAndResulByRun(@Param('id') id: string, @Param('runnum') runnum: number): Promise<Test[]> {
+  findTestAndResulByRun(@Param('id') id: string, @Param('runnum') runnum: number): Promise<TestModel[]> {
     return this.testsService.findTestAndResultByRun(id, runnum);
   }
 

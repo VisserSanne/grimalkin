@@ -1,4 +1,4 @@
-export type TestResult = {
+export type TestResultModel = {
   id: string;
   testrun: number;
   localrun: boolean;

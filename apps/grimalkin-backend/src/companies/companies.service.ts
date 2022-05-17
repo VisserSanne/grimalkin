@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Company as CompanyEntity } from "./company.entity";
-import { Company, CreateCompanyDto } from "@grimalkin/contracts";
+import { CompanyModel, CreateCompanyDto } from "@grimalkin/contracts";
 
 @Injectable()
 export class CompaniesService {
@@ -11,29 +11,29 @@ export class CompaniesService {
     private companiesRepository: Repository<CompanyEntity>
   ) {}
 
-  async create(createCompanyDto: CreateCompanyDto): Promise<Company> {
+  async create(createCompanyDto: CreateCompanyDto): Promise<CompanyModel> {
     const company = new CompanyEntity();
     company.name = createCompanyDto.name;
 
     return this.companiesRepository.save(company);
   }
 
-  async findAll(): Promise<Company[]> {
+  async findAll(): Promise<CompanyModel[]> {
     return this.companiesRepository.find();
   }
 
-  findOne(id: string): Promise<Company> {
+  findOne(id: string): Promise<CompanyModel> {
     return this.companiesRepository.findOne(id);
   }
 
-  findUsersByCompanyID(id: string): Promise<Company> {
+  findUsersByCompanyID(id: string): Promise<CompanyModel> {
     return this.companiesRepository.findOne({
       where: { id },
       relations: ["employees"]
     })
   }
 
-  findCompanyByUserID(userId: string): Promise<Company> {
+  findCompanyByUserID(userId: string): Promise<CompanyModel> {
     return this.companiesRepository
       .createQueryBuilder('company')
       .innerJoin('company.employees', 'employees')

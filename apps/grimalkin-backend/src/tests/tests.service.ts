@@ -2,19 +2,19 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Project } from "../projects/project.entity";
-import { CreateTestDto, Test } from "@grimalkin/contracts";
+import { CreateTestDto, TestModel } from "@grimalkin/contracts";
 import { Test as TestEntity } from "./test.entity";
 
 @Injectable()
 export class TestsService {
   constructor(
     @InjectRepository(TestEntity)
-    private testsRepository: Repository<Test>,
+    private testsRepository: Repository<TestModel>,
     @InjectRepository(Project)
     private projectRepository: Repository<Project>
   ) {}
 
-  async create(createTestDto: CreateTestDto): Promise<Test> {
+  async create(createTestDto: CreateTestDto): Promise<TestModel> {
     // Get project
     const project = await this.projectRepository.findOne(createTestDto.projectId);
 
@@ -26,15 +26,15 @@ export class TestsService {
     return this.testsRepository.save(test);
   }
 
-  findAll(): Promise<Test[]> {
+  findAll(): Promise<TestModel[]> {
     return this.testsRepository.find();
   }
 
-  findOne(id: string): Promise<Test> {
+  findOne(id: string): Promise<TestModel> {
     return this.testsRepository.findOne(id);
   }
 
-  async findTestsByProjectId(projectId: string): Promise<Test[]> {
+  async findTestsByProjectId(projectId: string): Promise<TestModel[]> {
     return this.testsRepository.find({
       where: {
         project: projectId
@@ -42,7 +42,7 @@ export class TestsService {
     })
   }
 
-  async findTestAndResultByRun(projectId: string, runnum: number): Promise<Test[]> {
+  async findTestAndResultByRun(projectId: string, runnum: number): Promise<TestModel[]> {
     return this.testsRepository
       .createQueryBuilder('test')
       .innerJoinAndSelect('test.testresults', 'testresults')

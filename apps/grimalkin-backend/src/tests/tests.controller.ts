@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { TestResultsService } from "../testresults/testresults.service";
-import { TestResult, CreateTestDto, Test } from "@grimalkin/contracts";
+import { TestResultModel, CreateTestDto, TestModel } from "@grimalkin/contracts";
 import { TestsService } from "./tests.service";
 
 @Controller("tests")
@@ -11,27 +11,27 @@ export class TestsController {
     ) {}
 
   @Post()
-  create(@Body() createTestDto: CreateTestDto): Promise<Test> {
+  create(@Body() createTestDto: CreateTestDto): Promise<TestModel> {
     return this.testsService.create(createTestDto);
   }
 
   @Get()
-  findAll(): Promise<Test[]> {
+  findAll(): Promise<TestModel[]> {
     return this.testsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Test> {
+  findOne(@Param('id') id: string): Promise<TestModel> {
     return this.testsService.findOne(id);
   }
 
   @Get(':id/testresults')
-  findTestResultsByTestID(@Param('id') id: string): Promise<TestResult[]> {
+  findTestResultsByTestID(@Param('id') id: string): Promise<TestResultModel[]> {
     return this.testResultsService.findTestResultsByTestID(id);
   }
 
   @Get('/project/:id')
-  findTestsByProjectId(@Param('id') projectId: string): Promise<Test[]> {
+  findTestsByProjectId(@Param('id') projectId: string): Promise<TestModel[]> {
     return this.testsService.findTestsByProjectId(projectId);
   }
 
