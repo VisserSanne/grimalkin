@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { CompaniesService } from "./companies.service";
-import { Company } from "./company.entity";
-import { CreateCompanyDto } from "./dto/create-company.dto";
+import { Company, CreateCompanyDto } from "@grimalkin/contracts";
 
 @Controller("companies")
 export class CompaniesController {
@@ -24,7 +23,7 @@ export class CompaniesController {
 
   @Get(':id/users')
   findUsersByCompanyID(@Param('id') id: string): Promise<Company> {
-    return this.companiesService.findTestResultsByTestID(id);
+    return this.companiesService.findUsersByCompanyID(id);
   }
 
   @Delete(':id')

@@ -1,18 +1,18 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Company } from "./company.entity";
-import { CreateCompanyDto } from "./dto/create-company.dto";
+import { Company as CompanyEntity } from "./company.entity";
+import { Company, CreateCompanyDto } from "@grimalkin/contracts";
 
 @Injectable()
 export class CompaniesService {
   constructor(
-    @InjectRepository(Company)
-    private companiesRepository: Repository<Company>
+    @InjectRepository(CompanyEntity)
+    private companiesRepository: Repository<CompanyEntity>
   ) {}
 
   async create(createCompanyDto: CreateCompanyDto): Promise<Company> {
-    const company = new Company();
+    const company = new CompanyEntity();
     company.name = createCompanyDto.name;
 
     return this.companiesRepository.save(company);
@@ -26,7 +26,7 @@ export class CompaniesService {
     return this.companiesRepository.findOne(id);
   }
 
-  findTestResultsByTestID(id: string): Promise<Company> {
+  findUsersByCompanyID(id: string): Promise<Company> {
     return this.companiesRepository.findOne({
       where: {id},
       relations: ["employees"]
