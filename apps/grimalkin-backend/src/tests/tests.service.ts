@@ -46,8 +46,8 @@ export class TestsService {
     return this.testsRepository
       .createQueryBuilder('test')
       .innerJoinAndSelect('test.testresults', 'testresults')
-      .where('test.projectId = :projectId', {projectId})
-      .andWhere('testresults.testrun = :runnum', {runnum})
+      .where('test.projectId = :projectId', { projectId })
+      .andWhere('testresults.testrun = :runnum', { runnum })
       .getMany();
   }
 

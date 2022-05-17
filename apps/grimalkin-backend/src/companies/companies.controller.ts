@@ -26,6 +26,11 @@ export class CompaniesController {
     return this.companiesService.findUsersByCompanyID(id);
   }
 
+  @Get('user/:user')
+  findCompanyByUserID(@Param('user') userId: string): Promise<Company> {
+    return this.companiesService.findCompanyByUserID(userId);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
     return this.companiesService.remove(id);

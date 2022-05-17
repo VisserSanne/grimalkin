@@ -28,9 +28,17 @@ export class CompaniesService {
 
   findUsersByCompanyID(id: string): Promise<Company> {
     return this.companiesRepository.findOne({
-      where: {id},
+      where: { id },
       relations: ["employees"]
     })
+  }
+
+  findCompanyByUserID(userId: string): Promise<Company> {
+    return this.companiesRepository
+      .createQueryBuilder('company')
+      .innerJoin('company.employees', 'employees')
+      .where('employees.id = :userId', { userId })
+      .getOne();
   }
 
   async remove(id: string): Promise<void> {
