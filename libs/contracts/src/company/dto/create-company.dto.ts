@@ -1,3 +1,3 @@
-export class CreateCompanyDto {
+export type CreateCompanyDto = {
   name: string;
 }

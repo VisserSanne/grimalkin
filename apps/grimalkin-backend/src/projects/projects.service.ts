@@ -33,6 +33,14 @@ export class ProjectsService {
     return this.projectsRepository.findOne(id);
   }
 
+  findProjectsByCompanyID(companyId): Promise<ProjectModel[]> {
+    return this.projectsRepository.find({
+      where: {
+        company: companyId
+      }
+    });
+  }
+
   async remove(id: string): Promise<void> {
     await this.projectsRepository.delete(id);
   }

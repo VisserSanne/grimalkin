@@ -1,4 +1,4 @@
-export class CreateTestResultDto {
+export type CreateTestResultDto = {
   testrun: number;
   localRun: boolean;
   testId: string;

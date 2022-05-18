@@ -30,6 +30,11 @@ export class ProjectsController {
     return this.testsService.findTestAndResultByRun(id, runnum);
   }
 
+  @Get('company/:companyId')
+  findProjectsByCompanyID(@Param('companyId') companyId: string): Promise<ProjectModel[]> {
+    return this.projectsService.findProjectsByCompanyID(companyId);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
     return this.projectsService.remove(id);
