@@ -30,5 +30,19 @@ const getProjectsByCompanyId = (companyId: string) => {
 }
 
 export function useProjectsByCompanyId(companyId: string) {
-  return useQuery(['company', companyId, 'projects'], () => getProjectsByCompanyId(companyId))
+  return useQuery(
+    ['company', companyId, 'projects'], 
+    () => getProjectsByCompanyId(companyId), 
+    {enabled: companyId.length > 0}
+  );
+}
+
+const getTestAndResultsByRun = (projectId: string, runnumber: number) => {
+  return API(`/${projectId}/run/${runnumber}`)
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+}
+
+export function useTestAndResultsByRun(projectId: string, runnumber: number) {
+  return useQuery(["project", projectId, "tests"], () => getTestAndResultsByRun(projectId, runnumber));
 }

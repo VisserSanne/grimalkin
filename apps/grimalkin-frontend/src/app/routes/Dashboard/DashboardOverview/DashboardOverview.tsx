@@ -29,16 +29,22 @@ export const DashboardOverview = () => {
         : <div>
           <p>Select a company</p>
           <Group>
-            {companies.map(company => <Button variant={selectedCompany === company.id ? 'outline' : 'filled'} onClick={() => setSelectedCompany(company.id)}>{company.name}</Button>)}
+            {companies.map(company => <Button variant={selectedCompany === company.id ? 'outline' : 'filled'} onClick={() => setSelectedCompany(company.id)} key={company.id}>{company.name}</Button>)}
           </Group>
         </div>
       }
-      {selectedCompany !== '' && query.isLoading
-        ? <h1>Loading</h1>
-        : data.map(project =>
-          <DashboardProject key={project.id} project={project} />
-        )
-      }
+      {selectedCompany !== '' && <DashboardProjects isLoading={query.isLoading} projects={data} />}
+    </div>
+  )
+}
+
+const DashboardProjects = ({ isLoading, projects }: { isLoading: boolean, projects: ProjectModel[] }) => {
+  if (isLoading) return <h1>Loading</h1>
+  return (
+    <div>
+      {projects.map(project =>
+        <DashboardProject key={project.id} project={project} />
+      )}
     </div>
   )
 }

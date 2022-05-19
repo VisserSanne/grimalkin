@@ -26,13 +26,6 @@ export class CompaniesService {
     return this.companiesRepository.findOne(id);
   }
 
-  findUsersByCompanyID(id: string): Promise<CompanyModel> {
-    return this.companiesRepository.findOne({
-      where: { id },
-      relations: ["employees"]
-    })
-  }
-
   findCompanyByUserID(userId: string): Promise<CompanyModel> {
     return this.companiesRepository
       .createQueryBuilder('company')

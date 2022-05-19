@@ -22,3 +22,23 @@ const getCompanyById = (companyId: string) => {
 export function useCompany(companyId: string) {
   return useQuery(["company", companyId], () => getCompanyById(companyId));
 }
+
+const getUsersByCompanyId = (companyId: string) => {
+  return API(`/${companyId}/users`)
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+}
+
+export function useUsersByCompanyId(companyId: string) {
+  return useQuery(["company", companyId, "users"], () => getUsersByCompanyId(companyId));
+}
+
+const getCompanyByUserId = (userId: string) => {
+  return API(`/user/${userId}`)
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+}
+
+export function useCompanyByUserId(userId: string) {
+  return useQuery(["user", userId, "company"], () => getCompanyByUserId(userId));
+}
