@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "contracts": "libs/contracts",
     "grimalkin-backend": "apps/grimalkin-backend",
     "grimalkin-frontend": "apps/grimalkin-frontend",
     "grimalkin-frontend-e2e": "apps/grimalkin-frontend-e2e"

@@ -1,5 +1,7 @@
 export const environment = {
   production: false,
-  mongoDbUsername: '',
-  mongoDbPassword: '',
+  dbUsername: 'root',
+  dbPassword: 'root',
+  dbHost: 'localhost',
+  dbPort: 3306,
 };
