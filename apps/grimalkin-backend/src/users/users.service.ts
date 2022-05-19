@@ -35,6 +35,12 @@ export class UsersService {
     });
   }
 
+  findUsersByCompanyID(companyId: string): Promise<UserModel[]> {
+    return this.usersRepository.find({
+      where: { company: companyId }
+    });
+  }
+
   async remove(id: string): Promise<void> {
     await this.usersRepository.delete(id);
   }

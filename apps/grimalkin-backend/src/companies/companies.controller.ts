@@ -1,10 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { CompaniesService } from "./companies.service";
-import { CompanyModel, CreateCompanyDto } from "@grimalkin/contracts";
+import { CompanyModel, CreateCompanyDto, UserModel } from "@grimalkin/contracts";
+import { UsersService } from "../users/users.service";
 
 @Controller("companies")
 export class CompaniesController {
-  constructor(private readonly companiesService: CompaniesService) {}
+  constructor(private readonly companiesService: CompaniesService, private readonly usersService: UsersService) {}
 
   @Post()
   create(@Body() createCompanyDto: CreateCompanyDto): Promise<CompanyModel> {
@@ -22,8 +23,8 @@ export class CompaniesController {
   }
 
   @Get(':id/users')
-  findUsersByCompanyID(@Param('id') id: string): Promise<CompanyModel> {
-    return this.companiesService.findUsersByCompanyID(id);
+  findUsersByCompanyID(@Param('id') id: string): Promise<UserModel[]> {
+    return this.usersService.findUsersByCompanyID(id);
   }
 
   @Get('user/:user')
